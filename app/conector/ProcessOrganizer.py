@@ -1,3 +1,5 @@
+import json
+
 from . import MarkeyAPI
 from . import DataValidator
 from . import Paciente
@@ -13,10 +15,18 @@ class ProcessOrganizer:
         markey_response = MarkeyAPI(self.credenciales).getResponse(self.dni)
         validator: DataValidator = DataValidator(markey_response)
         if validator.isValid():
-            return self.build_paciente(validator)
+            return self.build_response(validator)
         else:
             return []
 
-    def build_paciente(self, validator: DataValidator):
-        return Paciente(nombre=validator.getFirstname(self))
+    def build_response(self, validator: DataValidator):
+        return {
+            "firstName" : validator.getFirstname(),
+            "lastName" : validator.getLastname(),
+            "dni" : self.dni,
+            "customerType": {
+                "id" : Settings().CUSTOMERTYPE
+            }
+        }
+
 

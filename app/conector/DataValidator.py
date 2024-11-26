@@ -9,20 +9,20 @@ class DataValidator:
         return len(self.data) > 0
 
 
-    def getFirstname(self, paciente):
+    def getFirstname(self):
         try:
-            return paciente["paciPaciente"]
+            return self.data[0]['paciPaciente']
         except KeyError:
             return ""
 
-    def getLastname(self, paciente):
+    def getLastname(self):
         try:
-            return paciente["paciPaciente"]
+            return self.data[0]['paciPaciente']
         except KeyError:
             return ""
 
-    def getMotivo(self, paciente):
+    def getMotivo(self):
         try:
-            return paciente["turnEfector"]
+            return self.data["turnEfector"]
         except KeyError:
             return ""
