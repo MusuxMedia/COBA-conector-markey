@@ -11,13 +11,15 @@ class DataValidator:
 
     def getFirstname(self):
         try:
-            return self.data[0]['paciPaciente']
+            name = self.data[0]['paciPaciente'].split()
+            return name[-1]
         except KeyError:
             return ""
 
     def getLastname(self):
         try:
-            return self.data[0]['paciPaciente']
+            name = self.data[0]['paciPaciente'].split()
+            return " ".join(name[0:-1])
         except KeyError:
             return ""
 
