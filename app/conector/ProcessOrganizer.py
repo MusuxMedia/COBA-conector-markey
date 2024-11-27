@@ -20,13 +20,12 @@ class ProcessOrganizer:
             return []
 
     def build_response(self, validator: DataValidator):
-        return {
-            "firstName" : validator.getFirstname(),
-            "lastName" : validator.getLastname(),
-            "dni" : self.dni,
+        return [{
+            "firstName": validator.getFirstname(),
+            "lastName": validator.getLastname(),
+            "dni": self.dni,
             "customerType": {
-                "id" : Settings().CUSTOMERTYPE
-            }
-        }
-
-
+                "id": Settings().CUSTOMERTYPE
+            },
+            "appointment": validator.getAppointments(),
+        }]
