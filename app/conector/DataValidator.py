@@ -34,7 +34,7 @@ class DataValidator:
         l = []
         for appointment in self.data:
             l.append({
-                "queue.name" : "Turno reservado",
+                "queue.name" : "Con turno",
                 "url" : "/api/terminal/queueUp",
                 "startAt": self.getFecha(appointment)
             })
