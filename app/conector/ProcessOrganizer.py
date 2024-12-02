@@ -24,6 +24,7 @@ class ProcessOrganizer:
             "firstName": validator.getFirstname(),
             "lastName": validator.getLastname(),
             "dni": self.dni,
+            "selectionName" : validator.getLastname(),
             "customerType": {
                 "id": Settings().CUSTOMERTYPE
             },
