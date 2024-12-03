@@ -21,13 +21,17 @@ class ProcessOrganizer:
 
     def build_response(self, validator: DataValidator):
         l = []
-        return [{
-            "firstName": validator.getFirstname(),
-            "lastName": validator.getLastname(),
-            "dni": self.dni,
-            "queue": {
-                "name": "Con turno"
-            },
-            "startAt": validator.getFecha(),
-            "endAt": validator.getFecha()
-        }]
+        for app in validator.data:
+            l.append(
+                {
+                    "firstName": validator.getFirstname(app),
+                    "lastName": validator.getLastname(app),
+                    "dni": self.dni,
+                    "queue": {
+                        "name": "Con turno"
+                    },
+                    "startAt": validator.getFecha(app),
+                    "endAt": validator.getFecha(app)
+                }
+            )
+        return l
