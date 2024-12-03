@@ -23,20 +23,9 @@ class DataValidator:
         except KeyError:
             return ""
 
-    def getFecha(self, app):
+    def getFecha(self):
         try:
-            return app["turnFechaInicio"]
+            return self.data[0]["turnFechaInicio"]
         except KeyError:
             return ""
 
-    def getAppointments(self):
-        diccio = dict()
-        l = []
-        for appointment in self.data:
-            l.append({
-                "queue.name" : "Con turno",
-                "url" : "/api/terminal/queueUp",
-                "startAt": self.getFecha(appointment)
-            })
-        diccio["buttons"] = l
-        return diccio
