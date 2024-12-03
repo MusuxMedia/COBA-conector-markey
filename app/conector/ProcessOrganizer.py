@@ -1,4 +1,5 @@
 from fastapi import HTTPException
+from starlette.responses import JSONResponse
 
 from . import DataValidator
 from . import MarkeyAPI
@@ -16,7 +17,10 @@ class ProcessOrganizer:
         if validator.isValid():
             return self.build_response(validator)
         else:
-            raise HTTPException(status_code=400, detail={"key" : "noAppointmentsMatch"})
+            return JSONResponse(
+                status_code=404,
+                content={"key": "noAppointmentsMatch"}
+            )
 
     def build_response(self, validator: DataValidator):
         l = []
@@ -29,6 +33,7 @@ class ProcessOrganizer:
                     "queue": {
                         "name": "Con turno"
                     },
+                    "queueName" : "Turno programado",
                     "startAt": validator.getFecha(app),
                     "endAt": validator.getFecha(app)
                 }
