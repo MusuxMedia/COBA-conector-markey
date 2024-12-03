@@ -1,9 +1,8 @@
-import json
+from fastapi import HTTPException
 
-from . import MarkeyAPI
 from . import DataValidator
-from . import Paciente
-from .config import Settings
+from . import MarkeyAPI
+
 
 
 class ProcessOrganizer:
@@ -17,7 +16,7 @@ class ProcessOrganizer:
         if validator.isValid():
             return self.build_response(validator)
         else:
-            return []
+            raise HTTPException(status_code=400, detail={"key" : "noAppointmentsMatch"})
 
     def build_response(self, validator: DataValidator):
         l = []
