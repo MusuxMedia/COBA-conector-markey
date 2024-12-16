@@ -11,6 +11,17 @@ class MarkeyAPI:
         self.operacion = credenciales.OPERATION
 
     def getResponse(self, dni):
+        # Agrego dos DNIs de prueba
+        if dni == "44553142":
+            return [{
+                "paciPaciente": "Valentin Pugliese",
+                "turnFechaInicio": "2022-03-29T15:00:00-0300"
+            }]
+        if dni == "32438618":
+            return [{
+                "paciPaciente": "Sonia Neibirt",
+                "turnFechaInicio": "2024-05-25T15:00:00-0300"
+            }]
         r = requests.request("GET", self.url, headers=self.__getHeaders(), data=self.__getPayload(dni))
         if r.status_code != 200:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token o Apikey de Markey Incorrecta")
