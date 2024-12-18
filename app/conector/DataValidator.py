@@ -9,34 +9,23 @@ class DataValidator:
         return len(self.data) > 0
 
 
-    def getFirstname(self):
+    def getFirstname(self, appointment):
         try:
-            name = self.data[0]['paciPaciente'].split()
+            name = appointment['paciPaciente'].split()
             return name[-1]
         except KeyError:
             return ""
 
-    def getLastname(self):
+    def getLastname(self, appointment):
         try:
-            name = self.data[0]['paciPaciente'].split()
+            name = appointment['paciPaciente'].split()
             return " ".join(name[0:-1])
         except KeyError:
             return ""
 
-    def getFecha(self, app):
+    def getFecha(self, appointment):
         try:
-            return app["turnFechaInicio"]
+            return appointment["turnFechaInicio"]
         except KeyError:
             return ""
 
-    def getAppointments(self):
-        diccio = dict()
-        l = []
-        for appointment in self.data:
-            l.append({
-                "queue.name" : "Con turno",
-                "url" : "/api/terminal/queueUp",
-                "startAt": self.getFecha(appointment)
-            })
-        diccio["buttons"] = l
-        return diccio
